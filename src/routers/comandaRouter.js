@@ -66,6 +66,33 @@ routes.get("/", comandaController.ListaComandas);
 
 /**
 * @swagger
+* /comandas/{id}:
+*   get:
+*     summary: Buscar os dados de uma comanda pelo ID
+*     tags: [Comandas]
+*     parameters:
+*       - in: path
+*         name: id
+*         schema:
+*           type: integer
+*         required: true
+*         description: O ID da comanda
+*     responses:
+*       200:
+*         description: Dados da comanda correspondente
+*         contens:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/Comanda'
+*       404:
+*         description: Nenhum comanda encontrada para esse ID
+*       500:
+*         description: Erro interno do servidor
+*/
+routes.get("/:id", comandaController.BuscaComanda);
+
+/**
+* @swagger
 * /comandas:
 *   post:
 *     summary: Registar uma nova comanda
@@ -87,5 +114,63 @@ routes.get("/", comandaController.ListaComandas);
 *         description: Erro interno do servidor
 */
 routes.post("/", comandaController.CriaComanda);
+
+/**
+* @swagger
+* /comandas/{id}:
+*  put:
+*    summary: Atualiza um produto pelo ID
+*    tags: [Comandas]
+*    parameters:
+*      - in: path
+*        name: id
+*        schema:
+*          type: integer
+*        required: true
+*        description: O ID da comanda
+*    requestBody:
+*      required: true
+*      content:
+*        application/json:
+*          schema:
+*            $ref: '#/components/schemas/Comanda'
+*    responses:
+*      200:
+*        description: Dados da comanda atualizados
+*        content:
+*          application/json:
+*            schema:
+*              $ref: '#/components/schemas/Comanda'
+*      404:
+*        description: Comanda não encontrada
+*      500:
+*        description: Erro interno do servidor
+*/
+routes.put("/:id", comandaController.AtualizaComanda);
+
+/**
+* @swagger
+* /comandas/{id}:
+*   delete:
+*     summary: Deleta uma comanda baseado no ID
+*     tags: [Comandas]
+*     parameters:
+*       - in: path
+*         name: id
+*         schema:
+*           type: integer
+*         required: true
+*         description: O ID da comanda
+* 
+*     responses:
+*       200:
+*         description: Comanda deletada
+*       404:
+*         description: Comanda não encontrada
+*       500:
+*         description: Erro interno do servidor
+*/
+
+routes.delete("/:id", comandaController.DeletaComanda);
 
 module.exports = routes;
