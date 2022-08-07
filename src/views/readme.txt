@@ -1,0 +1,1 @@
+Não ficou como requisito implementar views, já que tem as doc de swagger para utilizar também, então só deixei aqui pronto para respeitar a arquitetura :D

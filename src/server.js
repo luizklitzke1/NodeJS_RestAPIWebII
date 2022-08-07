@@ -1,10 +1,10 @@
 const express       = require("express"                );
-const bodyParser    = require("body-parser"            );
 const swaggerUI     = require("swagger-ui-express"     );
 const swaggerJsdoc  = require("swagger-jsdoc"          );
 const cors          = require("cors"                   );
 const usuarioRouter = require("./routers/usuarioRouter");
 const produtoRouter = require("./routers/produtoRouter");
+const comandaRouter = require("./routers/comandaRouter");
 
 const api = new express();
 
@@ -36,5 +36,6 @@ api.use(express.json());
 
 api.use("/usuarios", usuarioRouter)
 api.use("/produtos", produtoRouter)
+api.use("/comandas", comandaRouter)
 
 api.listen(8080);

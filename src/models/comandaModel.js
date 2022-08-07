@@ -1,8 +1,7 @@
 const Sequelize = require("sequelize")
 const sequelizeDB = require("../sequelize/sequelizeConfigs");
-const Produto = require("./produtoModel");
 
-const produtoModel = require("./produtoModel")
+const Usuario = require("./usuarioModel");
 
 class Comanda extends Sequelize.Model{}
 
@@ -14,25 +13,7 @@ Comanda.init(
             primaryKey    : true,
             autoIncrement : true,
             allowNull     : false,
-        },
-
-        idUsuario :
-        {
-            type          : Sequelize.INTEGER,
-            allowNull     : false,
-        },
-
-        nomeUsuario :
-        {
-            type      : Sequelize.STRING,
-            allowNull : false,
-        },
-
-        telefoneUsuario : 
-        {
-            type : Sequelize.INTEGER,
-            allowNull : false,
-        },
+        }
     },
 
     {
@@ -42,5 +23,7 @@ Comanda.init(
         updatedAt: false,
     }
 )
+
+Comanda.belongsTo(Usuario, {foreignKey : "idUsuario"})
 
 module.exports = Comanda

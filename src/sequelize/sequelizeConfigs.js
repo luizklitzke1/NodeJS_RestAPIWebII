@@ -9,7 +9,7 @@ const sequelizedataBase = new Sequelize({
 (async () => 
 {
     await sequelizedataBase.authenticate();
-    await sequelizedataBase.sync({force:false});
+    await sequelizedataBase.sync( { update : true} );
 }) ();
 
 module.exports = sequelizedataBase;

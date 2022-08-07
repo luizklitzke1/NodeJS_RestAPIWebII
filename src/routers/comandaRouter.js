@@ -1,5 +1,5 @@
 const Express = require("express")
-const produtoController = require("../controllers/produtoController")
+const comandaController = require("../controllers/comandaController")
 
 const routes = Express.Router();
 
@@ -33,149 +33,60 @@ const routes = Express.Router();
 *               $ref: '#/components/schemas/Produto'
 *           description: Lista de produtos vinculados à comanda 
 *       example:
-*         id: 1
 *         idUsuario: 1
 *         preco: 25
 *         nomeUsuario: joao
-*         telefoneUsuario: 478888888
+*         telefoneUsuario: "478888888"
 *         produtos: [{ "id":1, "nome":"X-Salada", "preco":30}, { "id":2, "nome":"X-Bacon", "preco":35}]
 */
 
  /**
 * @swagger
 * tags:
-*   name: Produtos
-*   description: Controle do cadastro de produtos
+*   name: Comandas
+*   description: Controle do cadastro de comandas
 */
 
 /**
 * @swagger
-* /produtos:
+* /comandas:
 *   get:
-*     summary: Retorna uma lista com todos produtos cadastrados
-*     tags: [Produtos]
+*     summary: Retorna uma lista com todas comandas cadastradas e itens vinculados
+*     tags: [Comandas]
 *     responses:
 *       200:
-*         description: Lista dos produtos cadastrados
+*         description: Lista dos comandas cadastradas
 *         content:
 *           application/json:
 *             schema:
 *               type: array
 *               items:
-*                 $ref: '#/components/schemas/Produto'
+*                 $ref: '#/components/schemas/Comanda'
 */
-routes.get("/", produtoController.ListaProdutos);
+routes.get("/", comandaController.ListaComandas);
 
 /**
 * @swagger
-* /produtos/{id}:
-*   get:
-*     summary: Buscar os dados de um produto pelo ID
-*     tags: [Produtos]
-*     parameters:
-*       - in: path
-*         name: id
-*         schema:
-*           type: integer
-*         required: true
-*         description: O ID do produto
-*     responses:
-*       200:
-*         description: Dados do produto correspondente
-*         contens:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/Produto'
-*       404:
-*         description: Nenhum produto encontrado para esse ID
-*       500:
-*         description: Erro interno do servidor
-*/
-routes.get("/:id", produtoController.BuscaProduto);
-
-/**
-* @swagger
-* /produtos:
+* /comandas:
 *   post:
-*     summary: Registar um novo produto
-*     tags: [Produtos]
+*     summary: Registar uma nova comanda
+*     tags: [Comandas]
 *     requestBody:
 *       required: true
 *       content:
 *         application/json:
 *           schema:
-*             $ref: '#/components/schemas/Produto'
+*             $ref: '#/components/schemas/Comanda'
 *     responses:
 *       200:
-*         description: Produto criado com sucesso
+*         description: Comanda criado com sucesso
 *         content:
 *           application/json:
 *             schema:
-*               $ref: '#/components/schemas/Produto'
-* 
-*       404:
-*         description: Nenhum produto encontrado para esse ID
+*               $ref: '#/components/schemas/Comanda'
 *       500:
 *         description: Erro interno do servidor
 */
-routes.post("/", produtoController.CriaProduto);
-
-/**
-* @swagger
-* /produtos/{id}:
-*  put:
-*    summary: Atualiza um produto pelo ID
-*    tags: [Produtos]
-*    parameters:
-*      - in: path
-*        name: id
-*        schema:
-*          type: integer
-*        required: true
-*        description: O ID do produto
-*    requestBody:
-*      required: true
-*      content:
-*        application/json:
-*          schema:
-*            $ref: '#/components/schemas/Produto'
-*    responses:
-*      200:
-*        description: Dados do produto atualizados
-*        content:
-*          application/json:
-*            schema:
-*              $ref: '#/components/schemas/Produto'
-*      404:
-*        description: Produto não encontrado
-*      500:
-*        description: Erro interno do servidor
-*/
-routes.put("/", produtoController.AtualizaProduto);
-
-/**
-* @swagger
-* /produtos/{id}:
-*   delete:
-*     summary: Deleta um produto baseado no ID
-*     tags: [Produtos]
-*     parameters:
-*       - in: path
-*         name: id
-*         schema:
-*           type: integer
-*         required: true
-*         description: O ID do produto
-* 
-*     responses:
-*       200:
-*         description: Produto deletado
-*       404:
-*         description: Produto não encontrado
-*       500:
-*         description: Erro interno do servidor
-*/
-
-routes.delete("/:id", produtoController.DeletaProduto);
+routes.post("/", comandaController.CriaComanda);
 
 module.exports = routes;
