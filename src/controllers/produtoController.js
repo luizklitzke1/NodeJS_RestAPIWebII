@@ -1,5 +1,6 @@
 const { update } = require("../models/produtoModel");
-const produtoModel = require("../models/produtoModel")
+const produtoModel = require("../models/produtoModel");
+const Usuario = require("../models/usuarioModel");
 
 module.exports = 
 {
@@ -67,24 +68,22 @@ module.exports =
     {
         try
         {
-            const produtoCadastrado = await produtoModel.findByPk(request.body.id);
+            const produtoCadastrado = await produtoModel.findByPk(request.params.id);
 
             if (produtoCadastrado)
             {
-                produtoCadastrado.id    = request.body.id  ,
-                produtoCadastrado.nome  = request.body.nome,
-                produtoCadastrado.preco = request.body.preco
-
-                await produtoCadastrado.save();
+                await produtoCadastrado.update(request.body);
             
-                return response.json(produtos);
+                return response.json(produtoCadastrado);
             }
+            else
             {
                 return response.status(404).send("Nenhum produto encontrado para esse ID.");
             }
         }
         catch (error)
         {
+            console.log(error);
             return response.status(500).send(error);
         }
     },

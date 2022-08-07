@@ -34,7 +34,6 @@ const routes = Express.Router();
 *           description: Lista de produtos vinculados à comanda 
 *       example:
 *         idUsuario: 1
-*         preco: 25
 *         nomeUsuario: joao
 *         telefoneUsuario: "478888888"
 *         produtos: [{ "id":1, "nome":"X-Salada", "preco":30}, { "id":2, "nome":"X-Bacon", "preco":35}]

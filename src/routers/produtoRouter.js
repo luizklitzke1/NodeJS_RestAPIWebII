@@ -138,7 +138,7 @@ routes.post("/", produtoController.CriaProduto);
 *      500:
 *        description: Erro interno do servidor
 */
-routes.put("/", produtoController.AtualizaProduto);
+routes.put("/:id", produtoController.AtualizaProduto);
 
 /**
 * @swagger

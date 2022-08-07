@@ -67,16 +67,11 @@ module.exports =
     {
         try
         {
-            const usuarioCadastrado = await usuarioModel.findByPk(request.body.id);
+            const usuarioCadastrado = await usuarioModel.findByPk(request.params.id);
 
             if (usuarioCadastrado)
             {
-                usuarioCadastrado.idUsuario       = request.body.idUsuario,
-                usuarioCadastrado.nomeUsuario     = request.body.nomeUsuario,
-                usuarioCadastrado.telefoneUsuario = request.body.telefoneUsuario
-
-                await usuarioCadastrado.save();
-
+                await usuarioCadastrado.update(request.body);
                 return response.json(usuarioCadastrado);
             }
             else
