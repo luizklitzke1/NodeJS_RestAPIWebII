@@ -21,7 +21,15 @@ module.exports =
         try
         {
             const produtoCadastrado = await produtoModel.findByPk(request.params.id);
-            return response.json(produtoCadastrado)
+
+            if (produtoCadastrado)
+            {
+                return response.json(produtoCadastrado)
+            }
+            else
+            {
+                return response.status(404).send("Nenhum produto encontrado para esse ID.");
+            }
         }
         catch (error)
         {
@@ -33,6 +41,13 @@ module.exports =
     {
         try
         {
+            const produtoCadastrado = await produtoModel.findByPk(request.body.id);
+
+            if (produtoCadastrado)
+            {
+                return response.status(409).send("Já existe um produto cadastrado com esse ID.");
+            }
+
             const produto = await produtoModel.create(
                 {
                     id    : request.body.id  ,
@@ -61,9 +76,12 @@ module.exports =
                 produtoCadastrado.preco = request.body.preco
 
                 await produtoCadastrado.save();
+            
+                return response.json(produtos);
             }
-
-            return response.json(produtos);
+            {
+                return response.status(404).send("Nenhum produto encontrado para esse ID.");
+            }
         }
         catch (error)
         {
@@ -76,8 +94,16 @@ module.exports =
         try
         {
             const produtoCadastrado = await produtoModel.findByPk(request.params.id);
-            await produtoCadastrado.destroy();
-            return response.json(produtoCadastrado);
+
+            if (produtoCadastrado)
+            {
+                await produtoCadastrado.destroy();
+                return response.json(produtoCadastrado);
+            }
+            else
+            {
+                return response.status(404).send("Nenhum produto encontrado para esse ID.");
+            }
         }
         catch (error)
         {

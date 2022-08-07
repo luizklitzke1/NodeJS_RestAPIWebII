@@ -1,11 +1,11 @@
 const Sequelize = require("sequelize")
 const sequelizeDB = require("../sequelize/sequelizeConfigs");
 
-class Produto extends Sequelize.Model{}
+class Usuario extends Sequelize.Model{}
 
-Produto.init(
+Usuario.init(
     {
-        id :
+        idUsuario :
         {
             type          : Sequelize.INTEGER,
             primaryKey    : true,
@@ -13,25 +13,25 @@ Produto.init(
             allowNull     : false,
         },
 
-        nome :
+        nomeUsuario :
         {
             type      : Sequelize.STRING,
             allowNull : false,
         },
 
-        preco : 
+        telefoneUsuario : 
         {
-            type : Sequelize.INTEGER,
+            type : Sequelize.STRING,
             allowNull : false,
         },
     },
 
     {
-        sequelize : sequelizeDB, modelName : "Produtos",
+        sequelize : sequelizeDB, modelName : "Usuarios",
         timestamps: false,
         createdAt: false,
         updatedAt: false,
     }
 )
 
-module.exports = Produto
+module.exports = Usuario

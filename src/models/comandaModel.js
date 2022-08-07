@@ -22,11 +22,15 @@ Comanda.init(
         telefoneUsuario : 
         {
             type : Sequelize.INTEGER,
+            allowNull : false,
         },
     },
 
     {
-        sequelize : sequelizeDB, modelName : "Comandas"
+        sequelize : sequelizeDB, modelName : "Comandas",
+        timestamps: false,
+        createdAt: false,
+        updatedAt: false,
     }
 )
 

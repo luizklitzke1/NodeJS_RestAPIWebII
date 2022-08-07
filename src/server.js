@@ -1,10 +1,12 @@
-const express       = require("express");
-const bodyParser    = require("body-parser");
-const swaggerUI     = require("swagger-ui-express");
-const swaggerJsdoc  = require("swagger-jsdoc");
-const cors          = require("cors")
-const morgan        = require("morgan")
+const express       = require("express"                );
+const bodyParser    = require("body-parser"            );
+const swaggerUI     = require("swagger-ui-express"     );
+const swaggerJsdoc  = require("swagger-jsdoc"          );
+const cors          = require("cors"                   );
+const usuarioRouter = require("./routers/usuarioRouter");
 const produtoRouter = require("./routers/produtoRouter");
+
+const api = new express();
 
 const options = 
 {
@@ -27,14 +29,12 @@ const options =
 
 const specs = swaggerJsdoc(options);
 
-const api = new express();
-
 api.use("/swagger", swaggerUI.serve, swaggerUI.setup(specs));
 
 api.use(cors()),
 api.use(express.json());
-api.use(morgan("dev"));
 
+api.use("/usuarios", usuarioRouter)
 api.use("/produtos", produtoRouter)
 
 api.listen(8080);
