@@ -1,15 +1,24 @@
 const Sequelize = require("sequelize")
 const sequelizeDB = require("../sequelize/sequelizeConfigs");
+const Produto = require("./produtoModel");
+
+const produtoModel = require("./produtoModel")
 
 class Comanda extends Sequelize.Model{}
 
 Comanda.init(
     {
-        idUsuario :
+        id :
         {
             type          : Sequelize.INTEGER,
             primaryKey    : true,
             autoIncrement : true,
+            allowNull     : false,
+        },
+
+        idUsuario :
+        {
+            type          : Sequelize.INTEGER,
             allowNull     : false,
         },
 
