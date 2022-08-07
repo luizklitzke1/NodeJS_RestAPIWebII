@@ -1,0 +1,8 @@
+npm init -y
+npm i express
+npm i sequelize
+npm i body-parser 
+npm i swagger-ui-express
+npm i swagger-jsdoc 
+
+node .\src\server.js 
