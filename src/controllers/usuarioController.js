@@ -30,7 +30,7 @@ module.exports =
             }
             else
             {
-                return response.status(404).send("Usuário não encontrado para esse ID");
+                return response.status(400).send("Usuário não encontrado para esse ID");
             }
         }
         catch (error)
@@ -75,7 +75,7 @@ module.exports =
             
             if (usuario == null)
             {
-                return response.status(404).send("Não existe um usuário cadastrado com esse ID.");
+                return response.status(400).send("Não existe um usuário cadastrado com esse ID.");
             }
 
             if (usuario.senha != request.body.senha)
@@ -106,7 +106,7 @@ module.exports =
             }
             else
             {
-                return response.status(404).send("Usuário não encontrado para esse ID");
+                return response.status(400).send("Usuário não encontrado para esse ID");
             }
         }
         catch (error)
@@ -133,7 +133,7 @@ module.exports =
             }
             else
             {
-                return response.status(404).send("Usuário não encontrado para esse ID");
+                return response.status(400).send("Usuário não encontrado para esse ID");
             }
         }
         catch (error)

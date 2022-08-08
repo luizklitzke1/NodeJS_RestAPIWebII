@@ -108,7 +108,7 @@ routes.get("/", validaToken, usuarioController.ListaUsuarios);
 *         description: Token informado inválido
 *       403:
 *         description: Token de autenticação não enviado
-*       404:
+*       400:
 *         description : Nenhum usuário encontrado para esse ID
 *       500:
 *         description: Erro interno do servidor
@@ -169,7 +169,7 @@ routes.post("/", usuarioController.CriaUsuario);
 *             token:
 *               type: string
 *               description: token para ser utilizado como bearer nas requests pelo usuário
-*       404:
+*       400:
 *         description: Não existe um usuário cadastrado com esse ID
 *       403:
 *         description: Senha ou ID inválido informados.
@@ -210,7 +210,7 @@ routes.post("/login", usuarioController.LogaUsuario);
 *        escription: Token informado inválido
 *      403:
 *        description: Token de autenticação não enviado
-*      404:
+*      400:
 *        description: Nenhum usuário encontrado para esse ID
 *      500:
 *        description: Erro interno do servidor
@@ -240,7 +240,7 @@ routes.put("/", usuarioController.AtualizaUsuario);
 *         description: Token informado inválido
 *       403:
 *         description: Token de autenticação não enviado
-*       404:
+*       400:
 *         description: Nenhum usuário encontrado para esse ID
 *       500:
 *         description: Erro interno do servidor

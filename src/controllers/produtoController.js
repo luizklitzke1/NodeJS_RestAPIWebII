@@ -28,7 +28,7 @@ module.exports =
             }
             else
             {
-                return response.status(404).send("Nenhum produto encontrado para esse ID.");
+                return response.status(400).send("Nenhum produto encontrado para esse ID.");
             }
         }
         catch (error)
@@ -78,7 +78,7 @@ module.exports =
             }
             else
             {
-                return response.status(404).send("Nenhum produto encontrado para esse ID.");
+                return response.status(400).send("Nenhum produto encontrado para esse ID.");
             }
         }
         catch (error)
@@ -101,7 +101,7 @@ module.exports =
             }
             else
             {
-                return response.status(404).send("Nenhum produto encontrado para esse ID.");
+                return response.status(400).send("Nenhum produto encontrado para esse ID.");
             }
         }
         catch (error)

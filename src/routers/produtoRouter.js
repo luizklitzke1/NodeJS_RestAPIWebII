@@ -86,7 +86,7 @@ routes.get("/", validaToken, produtoController.ListaProdutos);
 *         description: Token informado inválido
 *       403:
 *         description: Token de autenticação não enviado
-*       404:
+*       400:
 *         description: Nenhum produto encontrado para esse ID
 *       500:
 *         description: Erro interno do servidor
@@ -119,7 +119,7 @@ routes.get("/:id", validaToken, produtoController.BuscaProduto);
 *         description: Token informado inválido
 *       403:
 *         description: Token de autenticação não enviado
-*       404:
+*       400:
 *         description: Nenhum produto encontrado para esse ID
 *       500:
 *         description: Erro interno do servidor
@@ -158,7 +158,7 @@ routes.post("/", validaToken, produtoController.CriaProduto);
 *        description: Token informado inválido
 *      403:
 *        description: Token de autenticação não enviado
-*      404:
+*      400:
 *        description: Produto não encontrado
 *      500:
 *        description: Erro interno do servidor
@@ -188,7 +188,7 @@ routes.put("/:id", validaToken, produtoController.AtualizaProduto);
 *         description: Token informado inválido
 *       403:
 *         description: Token de autenticação não enviado
-*       404:
+*       400:
 *         description: Produto não encontrado
 *       500:
 *         description: Erro interno do servidor

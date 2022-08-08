@@ -64,7 +64,7 @@ module.exports =
 
             if (comanda == null)
             {
-                return response.status(404).send("Comanda não encontrada para esse ID");
+                return response.status(400).send("Comanda não encontrada para esse ID");
             }
 
             let retornoFormatado = await FormataRetornoComanda(comanda); 
@@ -122,7 +122,7 @@ module.exports =
             let comanda = await comandaModel.findByPk(request.params.id, {include : [ { model : usuarioModel }, { model : produtoModel } ]});
             if (comanda == null)
             {
-                return response.status(404).send("Comanda não encontrada para esse ID");
+                return response.status(400).send("Comanda não encontrada para esse ID");
             }
 
             //Apenas atualizar a relação do ID de usuário, assumindo que linka com um cadastrado
@@ -187,7 +187,7 @@ module.exports =
             }
             else
             {
-                return response.status(404).send("Nenhuma comanda encontrada para esse ID.");
+                return response.status(400).send("Nenhuma comanda encontrada para esse ID.");
             }
         }
         catch (error)

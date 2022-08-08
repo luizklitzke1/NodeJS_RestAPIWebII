@@ -97,7 +97,7 @@ routes.get("/", validaToken, comandaController.ListaComandas);
 *         description: Token informado inválido
 *       403:
 *         description: Token de autenticação não enviado
-*       404:
+*       400:
 *         description: Nenhum comanda encontrada para esse ID
 *       500:
 *         description: Erro interno do servidor
@@ -166,7 +166,7 @@ routes.post("/", validaToken, comandaController.CriaComanda);
 *        description: Token informado inválido
 *      403:
 *        description: Token de autenticação não enviado
-*      404:
+*      400:
 *        description: Comanda não encontrada
 *      500:
 *        description: Erro interno do servidor
@@ -196,7 +196,7 @@ routes.put("/:id", validaToken, comandaController.AtualizaComanda);
 *         description: Token informado inválido
 *       403:
 *         description: Token de autenticação não enviado
-*       404:
+*       400:
 *         description: Comanda não encontrada
 *       500:
 *         description: Erro interno do servidor
