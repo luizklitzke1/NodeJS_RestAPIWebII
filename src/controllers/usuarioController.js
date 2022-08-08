@@ -121,7 +121,7 @@ module.exports =
         {
             if (request.usuario.admin == false)
             {
-                return response.status(401).send("Usuário não tem acesso à esse recurso.");
+                return response.status(403).send("Usuário não tem acesso à esse recurso.");
             }
 
             const usuarioCadastrado = await usuarioModel.findByPk(request.params.id);

@@ -1,4 +1,3 @@
-const { update } = require("../models/produtoModel");
 const produtoModel = require("../models/produtoModel");
 const Usuario = require("../models/usuarioModel");
 
@@ -72,6 +71,7 @@ module.exports =
 
             if (produtoCadastrado)
             {
+                console.log(request.body);
                 await produtoCadastrado.update(request.body);
             
                 return response.json(produtoCadastrado);

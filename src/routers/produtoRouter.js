@@ -42,6 +42,8 @@ const routes = Express.Router();
 *   get:
 *     summary: Retorna uma lista com todos produtos cadastrados
 *     tags: [Produtos]
+*     security:
+*       - bearerAuth: [] 
 *     responses:
 *       200:
 *         description: Lista dos produtos cadastrados

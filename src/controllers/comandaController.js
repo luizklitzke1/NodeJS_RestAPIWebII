@@ -122,34 +122,49 @@ module.exports =
     {
         try
         {
-            var [usuarioComanda, created] = await usuarioModel.findOrCreate(
-                {
-                    where: { idUsuario : request.body.idUsuario},
-                    defaults : { idUsuario       : request.body.idUsuario,
-                                 nomeUsuario     : request.body.nomeUsuario,
-                                 telefoneUsuario : request.body.telefoneUsuario 
-                                }
-                }
-            );
-
-            var novaComanda = await comandaModel.create({ idUsuario : usuarioComanda.idUsuario});
-
-            for (var produtoRequest of request.body.produtos)
+            let comanda = await comandaModel.findByPk(request.params.id, {include : [ { model : usuarioModel }, { model : produtoModel } ]});
+            if (comanda == null)
             {
-                var [produtoComanda, created] = await produtoModel.findOrCreate(
-                    {
-                        where: { id : produtoRequest.id},
-                        defaults : { id    : produtoRequest.id,
-                                     nome  : produtoRequest.nome,
-                                     preco : produtoRequest.preco 
-                                    }
-                    }
-                );
-                    
-                await (novaComanda.addProduto(produtoComanda));
+                return response.status(404).send("Comanda não encontrada para esse ID");
             }
 
-            let retornoFormatado = await FormataRetornoComanda(novaComanda);
+            //Apenas atualizar a relação do ID de usuário, assumindo que linka com um cadastrado
+            //sem cadastrar, porque não teria como saber qual parametro do usuário veio e dai já ficava muita cópia de rota
+            if (request.body.idUsuario != null)
+            {
+                let usuario = usuarioModel.findByPk(request.body.idUsuario);
+
+                if (usuario == null)
+                {
+                    return response.status(400).send("IdUsuario informado inválido, por favor verificar que o mesmo está cadastrado");
+                }
+
+                comanda.update({ idUsuario : usuario.idUsuario});
+            }
+
+            if (request.body.produtos != null)
+            {
+                await comanda.setProdutos([]); // Limpa a lista de produtos e adiciona os novos, adicionando caso não existam, já que tem tudo
+
+                for (var produtoRequest of request.body.produtos)
+                {
+                    var [produtoComanda, created] = await produtoModel.findOrCreate(
+                        {
+                            where: { id : produtoRequest.id},
+                            defaults : { id    : produtoRequest.id,
+                                         nome  : produtoRequest.nome,
+                                         preco : produtoRequest.preco 
+                                        }
+                        }
+                    );
+
+                    await (comanda.addProduto(produtoComanda));
+                }
+            }
+
+            comanda.save();
+
+            let retornoFormatado = await FormataRetornoComanda(comanda);
             return response.json(retornoFormatado)
         }
         catch (error)
@@ -164,7 +179,7 @@ module.exports =
         try
         {
             if (request.usuario.admin == false)
-                return response.status(401).send("Usuário não tem acesso à esse recurso.");
+                return response.status(403).send("Usuário não tem acesso à esse recurso.");
 
             const comandaCadastrada = await comandaModel.findByPk(request.params.id);
 
@@ -180,7 +195,6 @@ module.exports =
         }
         catch (error)
         {
-            console.log(error);
             return response.status(500).send(error);
         }
     }
