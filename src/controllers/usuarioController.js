@@ -88,7 +88,6 @@ module.exports =
         }
         catch (error)
         {
-            console.log(error);
             return response.status(500).send(error);
         }
     },
@@ -138,6 +137,7 @@ module.exports =
         }
         catch (error)
         {
+            console.log(error);
             return response.status(500).send(error);
         }
     }

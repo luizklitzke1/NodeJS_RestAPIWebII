@@ -113,7 +113,7 @@ routes.get("/", validaToken, usuarioController.ListaUsuarios);
 *       500:
 *         description: Erro interno do servidor
 */
-routes.get("/:id", usuarioController.BuscaUsuario);
+routes.get("/:id", validaToken, usuarioController.BuscaUsuario);
 
 /**
 * @swagger
@@ -215,7 +215,7 @@ routes.post("/login", usuarioController.LogaUsuario);
 *      500:
 *        description: Erro interno do servidor
 */
-routes.put("/", usuarioController.AtualizaUsuario);
+routes.put("/:id", validaToken, usuarioController.AtualizaUsuario);
 
 /**
 * @swagger
@@ -246,6 +246,6 @@ routes.put("/", usuarioController.AtualizaUsuario);
 *         description: Erro interno do servidor
 */
 
-routes.delete("/:id", usuarioController.DeletaUsuario);
+routes.delete("/:id", validaToken, usuarioController.DeletaUsuario);
 
 module.exports = routes;

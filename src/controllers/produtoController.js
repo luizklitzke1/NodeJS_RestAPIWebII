@@ -71,7 +71,6 @@ module.exports =
 
             if (produtoCadastrado)
             {
-                console.log(request.body);
                 await produtoCadastrado.update(request.body);
             
                 return response.json(produtoCadastrado);
@@ -83,7 +82,6 @@ module.exports =
         }
         catch (error)
         {
-            console.log(error);
             return response.status(500).send(error);
         }
     },
