@@ -3,9 +3,9 @@ const sequelizeDB = require("../sequelize/sequelizeConfigs");
 const Comanda = require("./comandaModel");
 const Produto = require("./produtoModel");
 
-const ComandaProdutos = sequelizeDB.define("ComandaProdutos", 
+const ComandaProdutos = sequelizeDB.define("comandaProdutos", 
 {
 });
  
-Comanda.belongsToMany(Produto, { through: ComandaProdutos, foreignKey : "ComandaIdComanda"});
-Produto.belongsToMany(Comanda, { through: ComandaProdutos, foreignKey : "ProdutoIdProduto"});
+Comanda.belongsToMany(Produto, { through: ComandaProdutos, foreignKey : "comandaIdComanda"});
+Produto.belongsToMany(Comanda, { through: ComandaProdutos, foreignKey : "produtoIdProduto"});

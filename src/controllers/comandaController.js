@@ -81,15 +81,12 @@ module.exports =
     {
         try
         {
-            var [usuarioComanda, created] = await usuarioModel.findOrCreate(
-                {
-                    where: { idUsuario : request.body.idUsuario},
-                    defaults : { idUsuario       : request.body.idUsuario,
-                                 nomeUsuario     : request.body.nomeUsuario,
-                                 telefoneUsuario : request.body.telefoneUsuario 
-                                }
-                }
-            );
+            let usuarioComanda = await usuarioModel.findByPk(request.body.idUsuario);
+
+            if (usuarioComanda == null)
+            {
+                return response.status(400).send("IdUsuario informado inválido, por favor verificar que o mesmo está cadastrado");
+            }
 
             var novaComanda = await comandaModel.create({ idUsuario : usuarioComanda.idUsuario});
 
@@ -139,7 +136,7 @@ module.exports =
                     return response.status(400).send("IdUsuario informado inválido, por favor verificar que o mesmo está cadastrado");
                 }
 
-                comanda.update({ idUsuario : usuario.idUsuario});
+                comanda.update({ idUsuario : usuario.idUsuario });
             }
 
             if (request.body.produtos != null)

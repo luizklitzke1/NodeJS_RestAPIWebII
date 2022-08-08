@@ -39,7 +39,7 @@ Usuario.init(
     },
 
     {
-        sequelize : sequelizeDB, modelName : "Usuarios",
+        sequelize : sequelizeDB, modelName : "usuarios",
         timestamps: false,
         createdAt: false,
         updatedAt: false,

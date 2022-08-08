@@ -17,7 +17,7 @@ Comanda.init(
     },
 
     {
-        sequelize : sequelizeDB, modelName : "Comandas",
+        sequelize : sequelizeDB, modelName : "comandas",
         timestamps: false,
         createdAt: false,
         updatedAt: false,

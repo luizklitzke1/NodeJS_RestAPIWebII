@@ -27,7 +27,7 @@ Produto.init(
     },
 
     {
-        sequelize : sequelizeDB, modelName : "Produtos",
+        sequelize : sequelizeDB, modelName : "produtos",
         timestamps: false,
         createdAt: false,
         updatedAt: false,
