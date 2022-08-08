@@ -20,7 +20,7 @@ const options =
     },
     servers: [
 			{
-				url: "http://localhost:8080",
+				url: "http://localhost:8080/RestAPIFurb",
 			},
 		],
   },
@@ -29,13 +29,13 @@ const options =
 
 const specs = swaggerJsdoc(options);
 
-api.use("/swagger", swaggerUI.serve, swaggerUI.setup(specs));
+api.use("/RestAPIFurb/swagger", swaggerUI.serve, swaggerUI.setup(specs));
 
 api.use(cors()),
 api.use(express.json());
 
-api.use("/usuarios", usuarioRouter)
-api.use("/produtos", produtoRouter)
-api.use("/comandas", comandaRouter)
+api.use("RestAPIFurb/usuarios", usuarioRouter)
+api.use("RestAPIFurb/produtos", produtoRouter)
+api.use("RestAPIFurb/comandas", comandaRouter)
 
 api.listen(8080);
