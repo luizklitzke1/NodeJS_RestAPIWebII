@@ -40,7 +40,7 @@ module.exports =
     {
         try
         {
-            const comandas = await comandaModel.findAll({include : [ {model : usuarioModel}, {model : produtoModel} ]});
+            const comandas = await comandaModel.findAll({include : [ { model : usuarioModel }, { model : produtoModel } ]});
 
             let retornoFormatado = []
             for (let comanda of comandas)
@@ -60,7 +60,7 @@ module.exports =
     {
         try
         {
-            const comanda = await comandaModel.findByPk(request.params.id, {include : [ {model : usuarioModel}, {model : produtoModel} ]});
+            const comanda = await comandaModel.findByPk(request.params.id, {include : [ { model : usuarioModel }, { model : produtoModel } ]});
 
             if (comanda == null)
             {
@@ -163,6 +163,9 @@ module.exports =
     {
         try
         {
+            if (request.usuario.admin == false)
+                return response.status(401).send("Usuário não tem acesso à esse recurso.");
+
             const comandaCadastrada = await comandaModel.findByPk(request.params.id);
 
             if (comandaCadastrada)
@@ -177,6 +180,7 @@ module.exports =
         }
         catch (error)
         {
+            console.log(error);
             return response.status(500).send(error);
         }
     }

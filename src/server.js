@@ -16,7 +16,7 @@ const options =
       title: "Rest API Suficiência Web II",
       version: "1.0",
       description:
-        "Rest API simples em NodeJS para Suficiência de Web II - Luiz G Klitzke",
+        "Rest API de Comandas, Produtos e Usuários em NodeJS para Suficiência de Web II - Luiz G Klitzke",
     },
     servers: [
 			{

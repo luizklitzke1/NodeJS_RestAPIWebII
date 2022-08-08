@@ -1,5 +1,6 @@
 const Express = require("express")
 const produtoController = require("../controllers/produtoController")
+const validaToken = require("../middleware/authJWT")
 
 const routes = Express.Router();
 
@@ -51,7 +52,7 @@ const routes = Express.Router();
 *               items:
 *                 $ref: '#/components/schemas/Produto'
 */
-routes.get("/", produtoController.ListaProdutos);
+routes.get("/", validaToken, produtoController.ListaProdutos);
 
 /**
 * @swagger
@@ -59,6 +60,8 @@ routes.get("/", produtoController.ListaProdutos);
 *   get:
 *     summary: Buscar os dados de um produto pelo ID
 *     tags: [Produtos]
+*     security:
+*       - bearerAuth: [] 
 *     parameters:
 *       - in: path
 *         name: id
@@ -78,7 +81,7 @@ routes.get("/", produtoController.ListaProdutos);
 *       500:
 *         description: Erro interno do servidor
 */
-routes.get("/:id", produtoController.BuscaProduto);
+routes.get("/:id", validaToken, produtoController.BuscaProduto);
 
 /**
 * @swagger
@@ -86,6 +89,8 @@ routes.get("/:id", produtoController.BuscaProduto);
 *   post:
 *     summary: Registar um novo produto
 *     tags: [Produtos]
+*     security:
+*       - bearerAuth: [] 
 *     requestBody:
 *       required: true
 *       content:
@@ -105,7 +110,7 @@ routes.get("/:id", produtoController.BuscaProduto);
 *       500:
 *         description: Erro interno do servidor
 */
-routes.post("/", produtoController.CriaProduto);
+routes.post("/", validaToken, produtoController.CriaProduto);
 
 /**
 * @swagger
@@ -113,6 +118,8 @@ routes.post("/", produtoController.CriaProduto);
 *  put:
 *    summary: Atualiza um produto pelo ID
 *    tags: [Produtos]
+*    security:
+*       - bearerAuth: [] 
 *    parameters:
 *      - in: path
 *        name: id
@@ -138,7 +145,7 @@ routes.post("/", produtoController.CriaProduto);
 *      500:
 *        description: Erro interno do servidor
 */
-routes.put("/:id", produtoController.AtualizaProduto);
+routes.put("/:id", validaToken, produtoController.AtualizaProduto);
 
 /**
 * @swagger
@@ -146,6 +153,8 @@ routes.put("/:id", produtoController.AtualizaProduto);
 *   delete:
 *     summary: Deleta um produto baseado no ID
 *     tags: [Produtos]
+*     security:
+*       - bearerAuth: [] 
 *     parameters:
 *       - in: path
 *         name: id
@@ -163,6 +172,6 @@ routes.put("/:id", produtoController.AtualizaProduto);
 *         description: Erro interno do servidor
 */
 
-routes.delete("/:id", produtoController.DeletaProduto);
+routes.delete("/:id", validaToken, produtoController.DeletaProduto);
 
 module.exports = routes;

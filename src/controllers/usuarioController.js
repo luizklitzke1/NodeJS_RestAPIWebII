@@ -1,5 +1,7 @@
+require("dotenv").config()
 const { update } = require("../models/usuarioModel");
 const usuarioModel = require("../models/usuarioModel")
+const jwt = require("jsonwebtoken")
 
 module.exports = 
 {
@@ -52,13 +54,41 @@ module.exports =
                 {
                     idUsuario       : request.body.idUsuario      ,
                     nomeUsuario     : request.body.nomeUsuario    ,
-                    telefoneUsuario : request.body.telefoneUsuario
+                    telefoneUsuario : request.body.telefoneUsuario,
+                    senha           : request.body.senha          ,
+                    admin           : request.body.admin
                 }
             );
             return response.json(usuario)
         }
         catch (error)
         {
+            return response.status(500).send(error);
+        }
+    },
+
+    async LogaUsuario(request, response)
+    {
+        try
+        {
+            var usuario = await usuarioModel.findByPk(request.body.id);
+            
+            if (usuario == null)
+            {
+                return response.status(409).send("Não existe um usuário cadastrado com esse ID.");
+            }
+
+            if (usuario.senha != request.body.senha)
+            {
+                return response.status(409).send("Senha ou ID inválido informados.");
+            }
+
+            const jwtToken = jwt.sign(usuario.toJSON(), process.env.JWT_ACCESSS_TOKEN_USER);
+            return response.status(200).send( {token : jwtToken });
+        }
+        catch (error)
+        {
+            console.log(error);
             return response.status(500).send(error);
         }
     },
@@ -89,6 +119,11 @@ module.exports =
     {
         try
         {
+            if (request.usuario.admin == false)
+            {
+                return response.status(401).send("Usuário não tem acesso à esse recurso.");
+            }
+
             const usuarioCadastrado = await usuarioModel.findByPk(request.params.id);
 
             if (usuarioCadastrado)

@@ -24,6 +24,18 @@ Usuario.init(
             type : Sequelize.STRING,
             allowNull : false,
         },
+
+        senha :
+        {
+            type      : Sequelize.STRING,
+            allowNull : false,
+        },
+
+        admin :
+        {
+            type      : Sequelize.BOOLEAN,
+            allowNull : false,
+        }
     },
 
     {

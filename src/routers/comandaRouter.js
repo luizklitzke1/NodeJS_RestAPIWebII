@@ -1,5 +1,6 @@
 const Express = require("express")
 const comandaController = require("../controllers/comandaController")
+const validaToken = require("../middleware/authJWT")
 
 const routes = Express.Router();
 
@@ -52,6 +53,8 @@ const routes = Express.Router();
 *   get:
 *     summary: Retorna uma lista com todas comandas cadastradas e itens vinculados
 *     tags: [Comandas]
+*     security:
+*       - bearerAuth: [] 
 *     responses:
 *       200:
 *         description: Lista dos comandas cadastradas
@@ -62,7 +65,7 @@ const routes = Express.Router();
 *               items:
 *                 $ref: '#/components/schemas/Comanda'
 */
-routes.get("/", comandaController.ListaComandas);
+routes.get("/", validaToken, comandaController.ListaComandas);
 
 /**
 * @swagger
@@ -70,6 +73,8 @@ routes.get("/", comandaController.ListaComandas);
 *   get:
 *     summary: Buscar os dados de uma comanda pelo ID
 *     tags: [Comandas]
+*     security:
+*       - bearerAuth: [] 
 *     parameters:
 *       - in: path
 *         name: id
@@ -89,7 +94,7 @@ routes.get("/", comandaController.ListaComandas);
 *       500:
 *         description: Erro interno do servidor
 */
-routes.get("/:id", comandaController.BuscaComanda);
+routes.get("/:id", validaToken, comandaController.BuscaComanda);
 
 /**
 * @swagger
@@ -97,6 +102,8 @@ routes.get("/:id", comandaController.BuscaComanda);
 *   post:
 *     summary: Registar uma nova comanda
 *     tags: [Comandas]
+*     security:
+*       - bearerAuth: [] 
 *     requestBody:
 *       required: true
 *       content:
@@ -113,14 +120,16 @@ routes.get("/:id", comandaController.BuscaComanda);
 *       500:
 *         description: Erro interno do servidor
 */
-routes.post("/", comandaController.CriaComanda);
+routes.post("/", validaToken, comandaController.CriaComanda);
 
 /**
 * @swagger
 * /comandas/{id}:
 *  put:
-*    summary: Atualiza um produto pelo ID
+*    summary: Atualiza uma comanda pelo ID
 *    tags: [Comandas]
+*    security:
+*       - bearerAuth: [] 
 *    parameters:
 *      - in: path
 *        name: id
@@ -146,7 +155,7 @@ routes.post("/", comandaController.CriaComanda);
 *      500:
 *        description: Erro interno do servidor
 */
-routes.put("/:id", comandaController.AtualizaComanda);
+routes.put("/:id", validaToken, comandaController.AtualizaComanda);
 
 /**
 * @swagger
@@ -154,6 +163,8 @@ routes.put("/:id", comandaController.AtualizaComanda);
 *   delete:
 *     summary: Deleta uma comanda baseado no ID
 *     tags: [Comandas]
+*     security:
+*       - bearerAuth: [] 
 *     parameters:
 *       - in: path
 *         name: id
@@ -171,6 +182,6 @@ routes.put("/:id", comandaController.AtualizaComanda);
 *         description: Erro interno do servidor
 */
 
-routes.delete("/:id", comandaController.DeletaComanda);
+routes.delete("/:id", validaToken, comandaController.DeletaComanda);
 
 module.exports = routes;
