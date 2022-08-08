@@ -34,8 +34,8 @@ api.use("/RestAPIFurb/swagger", swaggerUI.serve, swaggerUI.setup(specs));
 api.use(cors()),
 api.use(express.json());
 
-api.use("RestAPIFurb/usuarios", usuarioRouter)
-api.use("RestAPIFurb/produtos", produtoRouter)
-api.use("RestAPIFurb/comandas", comandaRouter)
+api.use("/RestAPIFurb/usuarios", usuarioRouter)
+api.use("/RestAPIFurb/produtos", produtoRouter)
+api.use("/RestAPIFurb/comandas", comandaRouter)
 
 api.listen(8080);
