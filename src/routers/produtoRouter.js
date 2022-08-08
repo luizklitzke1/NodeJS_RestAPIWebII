@@ -53,6 +53,10 @@ const routes = Express.Router();
 *               type: array
 *               items:
 *                 $ref: '#/components/schemas/Produto'
+*       401:
+*         description: Token informado inválido
+*       403:
+*         description: Token de autenticação não enviado
 */
 routes.get("/", validaToken, produtoController.ListaProdutos);
 
@@ -78,6 +82,10 @@ routes.get("/", validaToken, produtoController.ListaProdutos);
 *           application/json:
 *             schema:
 *               $ref: '#/components/schemas/Produto'
+*       401:
+*         description: Token informado inválido
+*       403:
+*         description: Token de autenticação não enviado
 *       404:
 *         description: Nenhum produto encontrado para esse ID
 *       500:
@@ -107,6 +115,10 @@ routes.get("/:id", validaToken, produtoController.BuscaProduto);
 *             schema:
 *               $ref: '#/components/schemas/Produto'
 * 
+*       401:
+*         description: Token informado inválido
+*       403:
+*         description: Token de autenticação não enviado
 *       404:
 *         description: Nenhum produto encontrado para esse ID
 *       500:
@@ -142,6 +154,10 @@ routes.post("/", validaToken, produtoController.CriaProduto);
 *          application/json:
 *            schema:
 *              $ref: '#/components/schemas/Produto'
+*      401:
+*        description: Token informado inválido
+*      403:
+*        description: Token de autenticação não enviado
 *      404:
 *        description: Produto não encontrado
 *      500:
@@ -168,6 +184,10 @@ routes.put("/:id", validaToken, produtoController.AtualizaProduto);
 *     responses:
 *       200:
 *         description: Produto deletado
+*       401:
+*         description: Token informado inválido
+*       403:
+*         description: Token de autenticação não enviado
 *       404:
 *         description: Produto não encontrado
 *       500:

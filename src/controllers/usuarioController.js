@@ -75,12 +75,12 @@ module.exports =
             
             if (usuario == null)
             {
-                return response.status(409).send("Não existe um usuário cadastrado com esse ID.");
+                return response.status(404).send("Não existe um usuário cadastrado com esse ID.");
             }
 
             if (usuario.senha != request.body.senha)
             {
-                return response.status(409).send("Senha ou ID inválido informados.");
+                return response.status(403).send("Senha ou ID inválido informados.");
             }
 
             const jwtToken = jwt.sign(usuario.toJSON(), process.env.JWT_ACCESSS_TOKEN_USER);

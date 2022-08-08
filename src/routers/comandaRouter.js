@@ -64,6 +64,10 @@ const routes = Express.Router();
 *               type: array
 *               items:
 *                 $ref: '#/components/schemas/Comanda'
+*       401:
+*         description: Token informado inválido
+*       403:
+*         description: Token de autenticação não enviado
 */
 routes.get("/", validaToken, comandaController.ListaComandas);
 
@@ -89,6 +93,10 @@ routes.get("/", validaToken, comandaController.ListaComandas);
 *           application/json:
 *             schema:
 *               $ref: '#/components/schemas/Comanda'
+*       401:
+*         description: Token informado inválido
+*       403:
+*         description: Token de autenticação não enviado
 *       404:
 *         description: Nenhum comanda encontrada para esse ID
 *       500:
@@ -117,6 +125,10 @@ routes.get("/:id", validaToken, comandaController.BuscaComanda);
 *           application/json:
 *             schema:
 *               $ref: '#/components/schemas/Comanda'
+*       401:
+*         description: Token informado inválido
+*       403:
+*         description: Token de autenticação não enviado
 *       500:
 *         description: Erro interno do servidor
 */
@@ -150,6 +162,10 @@ routes.post("/", validaToken, comandaController.CriaComanda);
 *          application/json:
 *            schema:
 *              $ref: '#/components/schemas/Comanda'
+*      401:
+*        description: Token informado inválido
+*      403:
+*        description: Token de autenticação não enviado
 *      404:
 *        description: Comanda não encontrada
 *      500:
@@ -176,6 +192,10 @@ routes.put("/:id", validaToken, comandaController.AtualizaComanda);
 *     responses:
 *       200:
 *         description: Comanda deletada
+*       401:
+*         description: Token informado inválido
+*       403:
+*         description: Token de autenticação não enviado
 *       404:
 *         description: Comanda não encontrada
 *       500:

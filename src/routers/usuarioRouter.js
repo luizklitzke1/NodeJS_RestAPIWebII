@@ -73,6 +73,10 @@ const routes = Express.Router();
 *               type: array
 *               items:
 *                 $ref: '#/components/schemas/Usuario'
+*       401:
+*         description: Token informado inválido
+*       403:
+*         description: Token de autenticação não enviado
 *       500:
 *         description: Erro interno do servidor
 */
@@ -100,6 +104,10 @@ routes.get("/", validaToken, usuarioController.ListaUsuarios);
 *           application/json:
 *             schema:
 *               $ref: '#/components/schemas/Usuario'
+*       401:
+*         description: Token informado inválido
+*       403:
+*         description: Token de autenticação não enviado
 *       404:
 *         description : Nenhum usuário encontrado para esse ID
 *       500:
@@ -163,6 +171,8 @@ routes.post("/", usuarioController.CriaUsuario);
 *               description: token para ser utilizado como bearer nas requests pelo usuário
 *       404:
 *         description: Não existe um usuário cadastrado com esse ID
+*       403:
+*         description: Senha ou ID inválido informados.
 *       500:
 *         description: Erro interno do servidor
 */
@@ -196,6 +206,10 @@ routes.post("/login", usuarioController.LogaUsuario);
 *          application/json:
 *            schema:
 *              $ref: '#/components/schemas/Usuario'
+*      401:
+*        escription: Token informado inválido
+*      403:
+*        description: Token de autenticação não enviado
 *      404:
 *        description: Nenhum usuário encontrado para esse ID
 *      500:
@@ -222,6 +236,10 @@ routes.put("/", usuarioController.AtualizaUsuario);
 *     responses:
 *       200:
 *         description: Usuário deletado
+*       401:
+*         description: Token informado inválido
+*       403:
+*         description: Token de autenticação não enviado
 *       404:
 *         description: Nenhum usuário encontrado para esse ID
 *       500:

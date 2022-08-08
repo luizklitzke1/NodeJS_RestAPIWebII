@@ -1,20 +1,7 @@
 const Sequelize = require("sequelize")
 const sequelizeDB = require("../sequelize/sequelizeConfigs");
 
-class Usuario extends Sequelize.Model{
-    toJSON() // Overload do método para não listar senhas nas requests
-    {
-        let JSONSemSenha =
-        {
-            idUsuario : this.idUsuario,
-            nomeUsuario : this.nomeUsuario,
-            telefoneUsuario : this.telefoneUsuario,
-            admin : this.senha
-        }
-
-        return JSONSemSenha;
-    }
-}
+class Usuario extends Sequelize.Model{}
 
 Usuario.init(
     {
