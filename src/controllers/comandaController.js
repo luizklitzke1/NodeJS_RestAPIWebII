@@ -132,7 +132,7 @@ module.exports =
             //sem cadastrar, porque não teria como saber qual parametro do usuário veio e dai já ficava muita cópia de rota
             if (request.body.idUsuario != null)
             {
-                let usuario = usuarioModel.findByPk(request.body.idUsuario);
+                let usuario = await usuarioModel.findByPk(request.body.idUsuario);
 
                 if (usuario == null)
                 {
